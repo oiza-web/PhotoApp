@@ -1,22 +1,14 @@
 <template>
   <div class="wrapper">
     <h1>Results for: "{{ tag }}"</h1>
-    <!-- <ul v-if="!loading" class="image-card-grid">
-      <grid-component v-for="n in 6" :key="n" :loading="true" />
-    </ul>
-    <ul v-else>
-      <grid-component 
-        v-for="image in cleanImages"
-        :key="image.id"
-        :image="image"
-      /> -->
-       <div class="container">
+
+    <div class="container">
       <div class="row g-3 py-6 mb-5">
         <div
           class="col-xs-12 col-sm-4"
           v-for="image in cleanImages"
-        :key="image.id"
-        :image="image"
+          :key="image.id"
+          :image="image"
         >
           <div class="card">
             <div class="card-image-wrapper">
@@ -38,19 +30,19 @@
         </div>
       </div>
     </div>
-    <!-- </ul> -->
+    <Pagination />
   </div>
 </template>
 
 <script>
 import flickr from "../flickr";
-// import GridComponent from "../../src/components/landingpage/GridComponent.vue";
+import Pagination from "../components/Pagination.vue"
 
 export default {
   name: "home",
-  // components: {
-  //   GridComponent,
-  // },
+  components:{
+    Pagination
+  },
   props: {
     tag: String,
   },

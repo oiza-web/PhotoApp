@@ -32,15 +32,19 @@
           </div>
         </div>
       </div>
+      <Pagination />
     </div>
   </div>
 </template>
 
 <script>
 import flickr from "../flickr";
-
+import Pagination from "../components/Pagination.vue"
 export default {
   name: "recentPhotos",
+  components:{
+    Pagination
+  },
   created() {
     this.fetchRecentPhotos();
   },
@@ -65,10 +69,6 @@ export default {
         });
     },
 
-    // details(){
-    //         this.$router.push({ name: 'searchResults', params: { tag: this.tag } });
-
-    // }
   },
 };
 </script>
