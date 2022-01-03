@@ -65,6 +65,10 @@ export default {
           this.recentPhotos = response.data.photos.photo;
         })
         .catch((error) => {
+          this.$toast.show({
+              message: error.data.message,
+              position: "top-right",
+          })
           console.log("Error occured: ", error);
         });
     },
