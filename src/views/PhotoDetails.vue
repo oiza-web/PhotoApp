@@ -26,11 +26,6 @@
 <script>
 import flickr from "../flickr";
 export default {
-  // props: {
-  //   id: String,
-  //   secret: String,
-  // },
-
   mounted() {
     console.log(this.$route.params.id,this.$route.params.secret )
     this.fetchPhotoInfo({
