@@ -19,13 +19,13 @@
               >
                 Search
               </button>
-              <button
+              <!-- <button
                 type="submit"
                 class="btn btn--primary btn--go"
                 @click.prevent="search"
               >
                 Go
-              </button>
+              </button> -->
             </div>
           </div>
         </form>
@@ -107,5 +107,15 @@ export default {
 a:active, a:focus, a:hover {
   color: white !important;
   text-decoration: none;
+}
+@media only screen  and (min-device-width: 320px) 
+  and (max-device-width: 480px){
+  /* For mobile phones: */
+  .form-control{
+    width: 150px;
+  }
+  .btn{
+   display: none;
+  }
 }
 </style>

@@ -6,7 +6,7 @@
     <div class="container">
       <div class="row g-3 py-6 mb-5">
         <div
-          class="col-xs-12 col-sm-4"
+          class="col-xs-12 col-md-6 col-lg-4 col-sm-4 "
           v-for="image in recentPhotos"
           :key="image.id"
           :image="image"

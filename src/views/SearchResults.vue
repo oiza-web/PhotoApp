@@ -5,7 +5,7 @@
     <div class="container">
       <div class="row g-3 py-6 mb-5">
         <div
-          class="col-xs-12 col-sm-4"
+          class="col-xs-12 col-md-6 col-lg-4 col-sm-4"
           v-for="image in cleanImages"
           :key="image.id"
           :image="image"
@@ -24,7 +24,7 @@
               </h5>
               <p class="card-text">By : {{ image.ownername }}</p>
               <p class="card-text">Views : {{ image.views }}</p>
-             <router-link
+              <router-link
                 :to="{
                   name: 'photoDetails',
                   params: { id: image.id, secret: image.secret },
@@ -44,12 +44,12 @@
 
 <script>
 import flickr from "../flickr";
-import LoadingSpinner from "../components/LoadingSpinner.vue"
-import Pagination from "../components/Pagination.vue"
+import LoadingSpinner from "../components/LoadingSpinner.vue";
+import Pagination from "../components/Pagination.vue";
 
 export default {
   name: "SearchResults",
-  components:{
+  components: {
     Pagination,
     LoadingSpinner,
   },
@@ -80,7 +80,7 @@ export default {
       }
     },
     fetchImages() {
-      this.loading =true;
+      this.loading = true;
       return flickr("photos.search", {
         tags: this.tag,
         extras: "url_n, owner_name, description, date_taken, views",
@@ -88,7 +88,7 @@ export default {
         per_page: 15,
       }).then((response) => {
         this.images = response.data.photos.photo;
-        this.loading = false
+        this.loading = false;
       });
     },
   },
