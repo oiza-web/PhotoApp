@@ -24,12 +24,12 @@
               </router-link>
             </li>
             <li class="nav-item rounded">
-              <a class="nav-link" href="#" 
+              <a class="nav-link" href="#browse" 
                 ><i class="bi bi-people-fill me-2"></i>Browse Photos</a
               >
             </li>
             <li class="nav-item rounded">
-              <a class="nav-link" href="#"
+              <a class="nav-link" href="#search"
                 ><i class="bi bi-telephone-fill me-2"></i>Search</a
               >
             </li>

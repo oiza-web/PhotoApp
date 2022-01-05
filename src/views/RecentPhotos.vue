@@ -1,7 +1,7 @@
 <template>
   <div>
     <ErrorToast v-if="error" />
-    <h2 class="d-flex justify-content-center my-5">Browse the Latest Uploads</h2>
+    <h2 class="d-flex justify-content-center my-5" id="browse">Browse the Latest Uploads</h2>
 
     <div class="container">
       <div class="row g-3 py-6 mb-5">

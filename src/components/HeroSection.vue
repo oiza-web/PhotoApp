@@ -5,6 +5,7 @@
         <form>
           <div class="input-group">
             <input
+              id="search"
               type="text"
               v-model="tag"
               placeholder="Search for any photo"
@@ -45,7 +46,9 @@
               name: 'searchResults',
               params: { tag: 'man' },
             }"
-            ><div :value="tag" @click="search" class="my-1">Man</div></router-link
+            ><div :value="tag" @click="search" class="my-1">
+              Man
+            </div></router-link
           >
           <router-link
             :to="{
@@ -61,7 +64,9 @@
               name: 'searchResults',
               params: { tag: 'cat' },
             }"
-            ><div :value="tag" @click="search" class="mx-2 my-1">Cat</div></router-link
+            ><div :value="tag" @click="search" class="mx-2 my-1">
+              Cat
+            </div></router-link
           >
         </div>
       </div>
@@ -104,18 +109,19 @@ export default {
 .color {
   color: white;
 }
-a:active, a:focus, a:hover {
+a:active,
+a:focus,
+a:hover {
   color: white !important;
   text-decoration: none;
 }
-@media only screen  and (min-device-width: 320px) 
-  and (max-device-width: 480px){
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
   /* For mobile phones: */
-  .form-control{
+  .form-control {
     width: 150px;
   }
-  .btn{
-   display: none;
+  .btn {
+    display: none;
   }
 }
 </style>
