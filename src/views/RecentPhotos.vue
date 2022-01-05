@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="centered">Browse the Latest Uploads</h2>
+    <h2 class="d-flex justify-content-center my-5">Browse the Latest Uploads</h2>
 
     <div class="container">
       <div class="row g-3 py-6 mb-5">
@@ -19,19 +19,24 @@
               />
             </div>
             <div class="card-body">
-              <h5 class="card-title">
+              <h6 class="card-title">
                 {{ image.title }}
-              </h5>
+              </h6>
               <p class="card-text">By : {{ image.ownername }}</p>
               <p class="card-text">Views : {{ image.views }}</p>
-              <router-link :to="{name:'photoDetails', params:{id: image.id, secret:image.secret}}">
-                 <a href="#" class="btn btn-primary"  >View Image</a>
+              <router-link
+                :to="{
+                  name: 'photoDetails',
+                  params: { id: image.id, secret: image.secret },
+                }"
+              >
+                <a href="#" class="btn btn-primary">View Image</a>
               </router-link>
-             
             </div>
           </div>
         </div>
       </div>
+      <LoadingSpinner v-if="loading" />
       <Pagination />
     </div>
   </div>
@@ -39,11 +44,14 @@
 
 <script>
 import flickr from "../flickr";
-import Pagination from "../components/Pagination.vue"
+import LoadingSpinner from "../components/LoadingSpinner.vue";
+import Pagination from "../components/Pagination.vue";
 export default {
   name: "recentPhotos",
-  components:{
-    Pagination
+
+  components: {
+    Pagination,
+    LoadingSpinner,
   },
   created() {
     this.fetchRecentPhotos();
@@ -51,11 +59,16 @@ export default {
   data() {
     return {
       recentPhotos: [],
+      loading: false,
+      error: false,
+      errorMessage: null
     };
   },
 
   methods: {
     fetchRecentPhotos() {
+      this.loading = true;
+
       return flickr("photos.getRecent", {
         extras: "url_n, owner_name, description, date_taken, views",
         page: 1,
@@ -63,16 +76,28 @@ export default {
       })
         .then((response) => {
           this.recentPhotos = response.data.photos.photo;
+          this.loading = false;
+          
         })
         .catch((error) => {
-          this.$toast.show({
-              message: error.data.message,
-              position: "top-right",
-          })
-          console.log("Error occured: ", error);
+          this.loading = false;
+          console.log("Error occured: ", error.message);
         });
     },
-
   },
+  computed:{
+    cleanImages() {
+      return this.recentPhotos.filter((image) => image.url_n);
+    },
+  }
 };
 </script>
+<style>
+.card-img-top {
+  height: 320px !important;
+}
+
+.card {
+  height: 520px;
+}
+</style>

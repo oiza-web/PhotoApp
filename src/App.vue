@@ -1,6 +1,8 @@
 <template>
   <div>
     <NavBar />
+    <ErrorToast
+       />
     <router-view />
     <FooterSection />
   </div>

@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row g-3 py-6 mb-5">
         <div class="col-xs-12 col-sm-4">
-          <div class="card">
+          <div class="card my-5">
             <div class="card-image-wrapper">
               <img
                 
@@ -25,7 +25,15 @@
 </template>
 <script>
 import flickr from "../flickr";
+
 export default {
+
+  data(){
+    return{
+      error: false,
+      errorMessage: null
+    }
+  },
   mounted() {
     console.log(this.$route.params.id,this.$route.params.secret )
     this.fetchPhotoInfo({
@@ -43,9 +51,18 @@ export default {
       page: 10,
       per_page: 15,
     }).then((response) => {
-      this.images = response.data.photos.photo;
-    });
+      this.images = response.data
+    }).catch((error) => {
+          this.loading = false;
+          console.log("Error occured: ", error.message);
+        });
   },
   }
 };
 </script>
+<style scoped>
+.card{
+  height: 800px;
+  width: 800px;
+}
+</style>

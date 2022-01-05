@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <h1>Results for: "{{ tag }}"</h1>
+    <h1 class="d-flex justify-content-center my-5">Results for: "{{ tag }}"</h1>
 
     <div class="container">
       <div class="row g-3 py-6 mb-5">
@@ -30,18 +30,21 @@
         </div>
       </div>
     </div>
+    <LoadingSpinner v-if="loading" />
     <Pagination />
   </div>
 </template>
 
 <script>
 import flickr from "../flickr";
+import LoadingSpinner from "../components/LoadingSpinner.vue"
 import Pagination from "../components/Pagination.vue"
 
 export default {
-  name: "home",
+  name: "SearchResults",
   components:{
-    Pagination
+    Pagination,
+    LoadingSpinner,
   },
   props: {
     tag: String,
@@ -70,6 +73,7 @@ export default {
       }
     },
     fetchImages() {
+      this.loading =true;
       return flickr("photos.search", {
         tags: this.tag,
         extras: "url_n, owner_name, description, date_taken, views",
@@ -77,6 +81,7 @@ export default {
         per_page: 15,
       }).then((response) => {
         this.images = response.data.photos.photo;
+        this.loading = false
       });
     },
   },
