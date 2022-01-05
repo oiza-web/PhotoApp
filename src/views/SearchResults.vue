@@ -24,7 +24,14 @@
               </h5>
               <p class="card-text">By : {{ image.ownername }}</p>
               <p class="card-text">Views : {{ image.views }}</p>
-              <a href="#" class="btn btn-primary">View Image</a>
+             <router-link
+                :to="{
+                  name: 'photoDetails',
+                  params: { id: image.id, secret: image.secret },
+                }"
+              >
+                <a href="#" class="btn btn-primary">View Image</a>
+              </router-link>
             </div>
           </div>
         </div>

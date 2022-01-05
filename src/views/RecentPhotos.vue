@@ -36,22 +36,43 @@
           </div>
         </div>
       </div>
+      <ErrorToast />
       <LoadingSpinner v-if="loading" />
-      <Pagination />
+      <!-- <div class="d-flex justify-content-center">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item">
+              <a class="page-link" v-if="firstPaginatorNumber >= 1" @click="handlePrevClick(firstPaginatorNumber-1)"  aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li class="page-item"><a class="page-link" @click="fetchRecentPhotos(1)" >{{firstPaginatorNumber}}</a></li>
+            <li class="page-item"><a class="page-link" @click="fetchRecentPhotos(2)" >{{secondPaginatorNumber}}</a></li>
+            <li class="page-item"><a class="page-link" @click="fetchRecentPhotos(3)" >{{thirdPaginatorNumber}}</a></li>
+            <li class="page-item">
+              <a class="page-link" @click="handleNextClick(thirdPaginatorNumber+1)"  aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+  </div> -->
     </div>
   </div>
 </template>
 
 <script>
 import flickr from "../flickr";
+import ErrorToast from "../components/ErrorToast.vue"
 import LoadingSpinner from "../components/LoadingSpinner.vue";
-import Pagination from "../components/Pagination.vue";
+// import Pagination from "../components/Pagination.vue";
 export default {
   name: "recentPhotos",
 
   components: {
-    Pagination,
+    // Pagination,
     LoadingSpinner,
+    ErrorToast
   },
   created() {
     this.fetchRecentPhotos();
@@ -61,7 +82,10 @@ export default {
       recentPhotos: [],
       loading: false,
       error: false,
-      errorMessage: null
+      errorMessage: null,
+      // firstPaginatorNumber: 1,
+      // secondPaginatorNumber: 2,
+      // thirdPaginatorNumber: 3
     };
   },
 
@@ -84,6 +108,37 @@ export default {
           console.log("Error occured: ", error.message);
         });
     },
+    // incrementPaginatorNumbers(pageNumber) {
+    //   if(pageNumber - this.firstPaginatorNumber > 2) {
+    //     this.firstPaginatorNumber++
+    //   }
+    //   if(pageNumber - this.secondPaginatorNumber > 1) {
+    //     this.secondPaginatorNumber++
+    //   }
+    //   if(pageNumber - this.thirdPaginatorNumber > 0 ) {
+    //     this.thirdPaginatorNumber++
+    //   }
+    // },
+    // decreasePaginatorNumbers(pageNumber) {
+    //   if(this.thirdPaginatorNumber - pageNumber > 2) {
+    //     this.firstPaginatorNumber--
+    //   }
+    //   if(this.secondPaginatorNumber - pageNumber > 1) {
+    //     this.secondPaginatorNumber--
+    //   }
+    //   if(this.thirdPaginatorNumber - pageNumber > 0 ) {
+    //     this.thirdPaginatorNumber--
+    //   }
+    // },
+    // handleNextClick(pageNumber) {
+    //   this.incrementPaginatorNumbers(pageNumber);
+    //   this.fetchRecentPhotos(pageNumber);
+    // },
+    // handlePrevClick(pageNumber) {
+    //   this.decreasePaginatorNumbers(pageNumber);
+    //   this.fetchRecentPhotos(pageNumber);
+    // },
+
   },
   computed:{
     cleanImages() {

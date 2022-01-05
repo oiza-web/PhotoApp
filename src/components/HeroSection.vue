@@ -30,8 +30,8 @@
           </div>
         </form>
         <div class="d-flex">
-          <div class="text-white fw-bold ml-2">Suggested tags:</div>
-          <div class="mx-2">
+          <div class="text-white fw-bold ml-2 my-1">Suggested tags:</div>
+          <div class="mx-2 my-1">
             <router-link
               :to="{
                 name: 'searchResults',
@@ -45,14 +45,14 @@
               name: 'searchResults',
               params: { tag: 'man' },
             }"
-            ><div :value="tag" @click="search">Man</div></router-link
+            ><div :value="tag" @click="search" class="my-1">Man</div></router-link
           >
           <router-link
             :to="{
               name: 'searchResults',
               params: { tag: 'dog' },
             }"
-            ><div :value="tag" @click="search" class="mx-2">
+            ><div :value="tag" @click="search" class="mx-2 my-1">
               Dog
             </div></router-link
           >
@@ -61,7 +61,7 @@
               name: 'searchResults',
               params: { tag: 'cat' },
             }"
-            ><div :value="tag" @click="search">Cat</div></router-link
+            ><div :value="tag" @click="search" class="mx-2 my-1">Cat</div></router-link
           >
         </div>
       </div>
@@ -104,7 +104,8 @@ export default {
 .color {
   color: white;
 }
-a:active {
-  color: white;
+a:active, a:focus, a:hover {
+  color: white !important;
+  text-decoration: none;
 }
 </style>
