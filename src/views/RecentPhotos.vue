@@ -1,5 +1,6 @@
 <template>
   <div>
+    <ErrorToast v-if="error" />
     <h2 class="d-flex justify-content-center my-5">Browse the Latest Uploads</h2>
 
     <div class="container">
@@ -36,7 +37,7 @@
           </div>
         </div>
       </div>
-      <ErrorToast />
+      
       <LoadingSpinner v-if="loading" />
       <!-- <div class="d-flex justify-content-center">
         <nav aria-label="Page navigation example">
@@ -72,7 +73,8 @@ export default {
   components: {
     // Pagination,
     LoadingSpinner,
-    ErrorToast
+    ErrorToast,
+    
   },
   created() {
     this.fetchRecentPhotos();
@@ -99,12 +101,14 @@ export default {
         per_page: 9,
       })
         .then((response) => {
+          this.recentPhotos.filter((image) => image.url_n);
           this.recentPhotos = response.data.photos.photo;
           this.loading = false;
           
         })
         .catch((error) => {
           this.loading = false;
+          this.error = true
           console.log("Error occured: ", error.message);
         });
     },
@@ -154,5 +158,10 @@ export default {
 
 .card {
   height: 520px;
+}
+.error-toast{
+  position: relative !important;
+  bottom: 0% !important;
+  
 }
 </style>

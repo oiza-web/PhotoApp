@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div class="py-5"> 
+       <ErrorToast v-if="error"/>
+    </div>
     <div class="container">
       <div class="row g-3 py-6 mb-5">
         <div class="col-xs-12 col-sm-4">
@@ -16,21 +19,25 @@
               <p class="card-text">By :Oiza</p>
               <p class="card-text">Views : 3</p>
               <a href="#" class="btn btn-primary">View Image</a>
+     
             </div>
           </div>
         </div>
       </div>
     </div>
+    
   </div>
 </template>
 <script>
+import ErrorToast from "../components/ErrorToast.vue"
 import flickr from "../flickr";
 
 export default {
-
+  components:{ErrorToast },
   data(){
     return{
       error: false,
+      success: false,
       errorMessage: null
     }
   },
@@ -52,9 +59,14 @@ export default {
       per_page: 15,
     }).then((response) => {
       this.images = response.data
+      this.success = response.data.message
+      console.log(this.success);
+      alert(this.success)
     }).catch((error) => {
           this.loading = false;
-          console.log("Error occured: ", error.message);
+          this.error = true;
+          console.log("Error occured: ", error);
+          alert(this.error)
         });
   },
   }
