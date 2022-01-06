@@ -87,7 +87,7 @@ export default {
 
 <style scoped>
 .background {
-  background: url("../assets/images/african-american-business-man.jpg");
+  background: url("../assets/images/bg-img.png");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -103,9 +103,7 @@ export default {
 .color {
   color: white;
 }
-a:active,
-a:focus,
-a:hover {
+a {
   color: white !important;
   text-decoration: none;
 }
