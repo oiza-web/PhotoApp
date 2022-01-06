@@ -19,7 +19,6 @@ const routes = [
     path: "/photo/:id/:secret", // view one picture
     name: "photoDetails",
     component: PhotoDetails,
-    props: true,
   },
 
   //Not found
