@@ -38,19 +38,19 @@
       </div>
     </div>
     <LoadingSpinner v-if="loading" />
-    <Pagination />
+    
   </div>
 </template>
 
 <script>
 import flickr from "../flickr";
 import LoadingSpinner from "../components/LoadingSpinner.vue";
-import Pagination from "../components/Pagination.vue";
+
 
 export default {
   name: "SearchResults",
   components: {
-    Pagination,
+  
     LoadingSpinner,
   },
   props: {

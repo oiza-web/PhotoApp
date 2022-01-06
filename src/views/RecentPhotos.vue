@@ -39,25 +39,32 @@
       </div>
       
       <LoadingSpinner v-if="loading" />
-      <!-- <div class="d-flex justify-content-center">
-        <nav aria-label="Page navigation example">
-          <ul class="pagination">
-            <li class="page-item">
-              <a class="page-link" v-if="firstPaginatorNumber >= 1" @click="handlePrevClick(firstPaginatorNumber-1)"  aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-              </a>
-            </li>
-            <li class="page-item"><a class="page-link" @click="fetchRecentPhotos(1)" >{{firstPaginatorNumber}}</a></li>
-            <li class="page-item"><a class="page-link" @click="fetchRecentPhotos(2)" >{{secondPaginatorNumber}}</a></li>
-            <li class="page-item"><a class="page-link" @click="fetchRecentPhotos(3)" >{{thirdPaginatorNumber}}</a></li>
-            <li class="page-item">
-              <a class="page-link" @click="handleNextClick(thirdPaginatorNumber+1)"  aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
-  </div> -->
+      <nav class="d-none d-lg-block">
+        <ul
+          class="pagination"
+          total-items="50"
+          items-per-page="10"
+          max-size="3"
+        >
+          <li class="page-item disabled">
+            <a class="page-link">Previous</a>
+          </li>
+
+          <li
+            class="page-item"
+            v-for="(page, i) in pagination.pages"
+            :key="`pagination_${i}`"
+            @click="fetchRecentPhotos(page)"
+            :class="pagination.page == page && 'active'"
+          >
+            <a class="page-link" href="#">{{ page }}</a>
+          </li>
+
+          <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+          </li>
+        </ul>
+      </nav>
     </div>
   </div>
 </template>
@@ -85,9 +92,12 @@ export default {
       loading: false,
       error: false,
       errorMessage: null,
-      // firstPaginatorNumber: 1,
-      // secondPaginatorNumber: 2,
-      // thirdPaginatorNumber: 3
+      pagination: {
+        page: 1,
+        pages: 0,
+        perpage: 0,
+        total: 0,
+      },
     };
   },
 
@@ -97,12 +107,18 @@ export default {
 
       return flickr("photos.getRecent", {
         extras: "url_n, owner_name, description, date_taken, views",
-        page: 1,
-        per_page: 9,
+        per_page: 36,
       })
         .then((response) => {
           this.recentPhotos.filter((image) => image.url_n);
           this.recentPhotos = response.data.photos.photo;
+          const { pages, page, perpage, total } = response.data.photos;
+          this.pagination = {
+            page,
+            pages,
+            perpage,
+            total,
+          };
           this.loading = false;
           
         })
@@ -112,36 +128,7 @@ export default {
           console.log("Error occured: ", error.message);
         });
     },
-    // incrementPaginatorNumbers(pageNumber) {
-    //   if(pageNumber - this.firstPaginatorNumber > 2) {
-    //     this.firstPaginatorNumber++
-    //   }
-    //   if(pageNumber - this.secondPaginatorNumber > 1) {
-    //     this.secondPaginatorNumber++
-    //   }
-    //   if(pageNumber - this.thirdPaginatorNumber > 0 ) {
-    //     this.thirdPaginatorNumber++
-    //   }
-    // },
-    // decreasePaginatorNumbers(pageNumber) {
-    //   if(this.thirdPaginatorNumber - pageNumber > 2) {
-    //     this.firstPaginatorNumber--
-    //   }
-    //   if(this.secondPaginatorNumber - pageNumber > 1) {
-    //     this.secondPaginatorNumber--
-    //   }
-    //   if(this.thirdPaginatorNumber - pageNumber > 0 ) {
-    //     this.thirdPaginatorNumber--
-    //   }
-    // },
-    // handleNextClick(pageNumber) {
-    //   this.incrementPaginatorNumbers(pageNumber);
-    //   this.fetchRecentPhotos(pageNumber);
-    // },
-    // handlePrevClick(pageNumber) {
-    //   this.decreasePaginatorNumbers(pageNumber);
-    //   this.fetchRecentPhotos(pageNumber);
-    // },
+    
 
   },
   computed:{
