@@ -20,13 +20,7 @@
               >
                 Search
               </button>
-              <!-- <button
-                type="submit"
-                class="btn btn--primary btn--go"
-                @click.prevent="search"
-              >
-                Go
-              </button> -->
+            
             </div>
           </div>
         </form>
