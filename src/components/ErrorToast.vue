@@ -12,7 +12,7 @@
             aria-label="Close"
           ></button>
         </div>
-        <div class="toast-body text-white">An Error Occured</div>
+        <div class="toast-body text-white">Oops! An Error Occured, try again</div>
       </div>
     </div>
   </div>

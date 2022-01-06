@@ -69,6 +69,7 @@ export default {
     return {
       loading: false,
       images: [],
+      error : false
     };
   },
   methods: {
@@ -89,7 +90,12 @@ export default {
       }).then((response) => {
         this.images = response.data.photos.photo;
         this.loading = false;
-      });
+        
+      }).catch((error) => {
+          this.loading = false;
+          this.error = error.message;
+          this.error = true || alert(error.message);
+        });
     },
   },
   computed: {

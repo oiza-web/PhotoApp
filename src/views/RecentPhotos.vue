@@ -1,12 +1,14 @@
 <template>
   <div>
     <ErrorToast v-if="error" />
-    <h2 class="d-flex justify-content-center my-5" id="browse">Browse the Latest Uploads</h2>
+    <h2 class="d-flex justify-content-center my-5" id="browse">
+      Browse the Latest Uploads
+    </h2>
 
     <div class="container">
       <div class="row g-3 py-6 mb-5">
         <div
-          class="col-xs-12 col-md-6 col-lg-4 col-sm-4 "
+          class="col-xs-12 col-md-6 col-lg-4 col-sm-4"
           v-for="image in recentPhotos"
           :key="image.id"
           :image="image"
@@ -37,7 +39,7 @@
           </div>
         </div>
       </div>
-      
+
       <LoadingSpinner v-if="loading" />
       <nav class="d-none d-lg-block">
         <ul
@@ -71,17 +73,15 @@
 
 <script>
 import flickr from "../flickr";
-import ErrorToast from "../components/ErrorToast.vue"
+import ErrorToast from "../components/ErrorToast.vue";
 import LoadingSpinner from "../components/LoadingSpinner.vue";
-// import Pagination from "../components/Pagination.vue";
+
 export default {
   name: "recentPhotos",
 
   components: {
-    // Pagination,
     LoadingSpinner,
     ErrorToast,
-    
   },
   created() {
     this.fetchRecentPhotos();
@@ -120,22 +120,14 @@ export default {
             total,
           };
           this.loading = false;
-          
         })
         .catch((error) => {
           this.loading = false;
-          this.error = true
-          console.log("Error occured: ", error.message);
+          this.error = error.message;
+          this.error = true || alert(error.message);
         });
     },
-    
-
   },
-  computed:{
-    cleanImages() {
-      return this.recentPhotos.filter((image) => image.url_n);
-    },
-  }
 };
 </script>
 <style>
@@ -146,9 +138,8 @@ export default {
 .card {
   height: 520px;
 }
-.error-toast{
+.error-toast {
   position: relative !important;
   bottom: 0% !important;
-  
 }
 </style>

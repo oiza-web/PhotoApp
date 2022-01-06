@@ -107,6 +107,9 @@ a {
   color: white !important;
   text-decoration: none;
 }
+a:hover{
+  color: bisque !important;
+}
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
   /* For mobile phones: */
   .form-control {

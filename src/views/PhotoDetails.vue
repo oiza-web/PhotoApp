@@ -11,7 +11,7 @@
               <img />
             </div>
             <div class="card-body">
-              <h5 class="card-title">5555</h5>
+              <h5 class="card-title">5555 </h5>
               <p class="card-text">By :Oiza</p>
               <p class="card-text">Views : 3</p>
               <a href="#" class="btn btn-primary">View Image</a>
@@ -32,7 +32,6 @@ export default {
     return {
       error: false,
       success: false,
-      errorMessage: null,
     };
   },
   mounted() {
