@@ -74,14 +74,25 @@ export default {
   data() {
     return {
       tag: "",
+      error: ''
     };
   },
   methods: {
     search() {
+      if (this.isTagEmpty){
+        alert('No tag')
+      }
       this.$router.push({ name: "searchResults", params: { tag: this.tag } });
       this.tag = "";
+      
     },
   },
+  computed:{
+     isTagEmpty() {
+      return !this.tag || this.tag.length === 0;
+    },
+
+  }
 };
 </script>
 

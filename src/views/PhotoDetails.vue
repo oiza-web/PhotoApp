@@ -14,7 +14,7 @@
               <h5 class="card-title">5555 </h5>
               <p class="card-text">By :Oiza</p>
               <p class="card-text">Views : 3</p>
-              <a href="#" class="btn btn-primary">View Image</a>
+              <a class="btn btn-primary" @click="this.$router.go(-1)" >Go Back</a>
             </div>
           </div>
         </div>
@@ -52,7 +52,7 @@ export default {
         per_page: 15,
       })
         .then((response) => {
-          this.images = response.data;
+          // this.images = response.data;
           this.success = response.data.message;
           console.log(this.success);
           alert(this.success);

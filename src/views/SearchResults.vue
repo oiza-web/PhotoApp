@@ -59,7 +59,9 @@ export default {
   created() {
     this.search();
   },
+  
   watch: {
+    // when prop change perform new api request
     tag(value) {
       this.search();
       console.log(value);
@@ -78,6 +80,8 @@ export default {
         this.loading = true;
         console.log("i got here");
         this.fetchImages();
+      } else{
+       console.log('oops')
       }
     },
     fetchImages() {
